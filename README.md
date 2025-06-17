@@ -1,1 +1,1 @@
-# nvdai-trials
+# vibe-trials
