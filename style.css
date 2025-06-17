@@ -1,33 +1,80 @@
+:root {
+    --background-color: #f4f4f4;
+    --text-color: #333;
+    --header-bg-color: #333;
+    --header-text-color: #fff;
+    --section-bg-color: #fff;
+    --border-color: #ddd;
+    --button-bg-color: #333;
+    --button-text-color: #fff;
+    --button-hover-bg-color: #555;
+}
+
+[data-theme="dark"] {
+    --background-color: #333;
+    --text-color: #f4f4f4;
+    --header-bg-color: #222; /* Darker header for dark mode */
+    --header-text-color: #fff;
+    --section-bg-color: #444; /* Darker section for dark mode */
+    --border-color: #555;
+    --button-bg-color: #f4f4f4; /* Light button for dark mode */
+    --button-text-color: #333;
+    --button-hover-bg-color: #ccc;
+}
+
 body {
     font-family: sans-serif;
     margin: 0;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
 }
 
 header {
-    background-color: #333;
-    color: #fff;
+    background-color: var(--header-bg-color);
+    color: var(--header-text-color);
     padding: 1em 0;
     text-align: center;
+    display: flex; /* For aligning title and button */
+    justify-content: space-between; /* Space between title and button */
+    align-items: center; /* Vertically align items */
+    padding-left: 1em; /* Add some padding */
+    padding-right: 1em; /* Add some padding */
 }
 
 header h1 {
     margin: 0;
 }
 
+/* Style for the toggle button itself */
+#darkModeToggle {
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: 1px solid var(--border-color);
+    padding: 0.5em 1em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#darkModeToggle:hover {
+    background-color: var(--button-hover-bg-color);
+}
+
+
 section {
     padding: 1em;
     margin: 1em;
-    background-color: #fff;
+    background-color: var(--section-bg-color);
     border-radius: 8px;
+    border: 1px solid var(--border-color); /* Add border for sections */
 }
 
 #projects .project {
     margin-bottom: 1em;
     padding: 1em;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
+    background-color: var(--section-bg-color); /* Ensure project divs also use theme */
 }
 
 #contact form div {
@@ -44,14 +91,16 @@ section {
 #contact textarea {
     width: 100%;
     padding: 0.5em;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
-    box-sizing: border-box; /* Ensures padding doesn't affect overall width */
+    box-sizing: border-box;
+    background-color: var(--background-color); /* Theme background for inputs */
+    color: var(--text-color); /* Theme text for inputs */
 }
 
 #contact button {
-    background-color: #333;
-    color: #fff;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
     padding: 0.7em 1.5em;
     border: none;
     border-radius: 4px;
@@ -59,15 +108,15 @@ section {
 }
 
 #contact button:hover {
-    background-color: #555;
+    background-color: var(--button-hover-bg-color);
 }
 
 footer {
     text-align: center;
     padding: 1em 0;
-    background-color: #333;
-    color: #fff;
-    position: relative; /* Changed from fixed to relative for better flow */
+    background-color: var(--header-bg-color); /* Use header bg for consistency */
+    color: var(--header-text-color); /* Use header text for consistency */
+    position: relative;
     bottom: 0;
     width: 100%;
 }
