@@ -1,29 +1,40 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const toggleButton = document.getElementById('darkModeToggle');
-    const currentTheme = localStorage.getItem('theme');
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contactForm');
 
-    // Apply saved theme on load
-    if (currentTheme) {
-        document.body.setAttribute('data-theme', currentTheme);
-        if (currentTheme === 'dark') {
-            toggleButton.textContent = 'Toggle Light Mode';
-        }
-    } else {
-        // Default to light theme if no preference is saved
-        document.body.setAttribute('data-theme', 'light');
-        toggleButton.textContent = 'Toggle Dark Mode';
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const inquiryType = document.getElementById('inquiry_type').value;
+            const message = document.getElementById('message').value.trim();
+
+            if (!name || !email || !inquiryType || !message) {
+                alert('Please fill in all fields, including inquiry type.');
+                return;
+            }
+
+            if (inquiryType === "") {
+                alert('Please select an inquiry type.');
+                return;
+            }
+
+            if (!validateEmail(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            // If validation passes, you can submit the form data
+            // For now, we'll just log it and show a success message
+            console.log('Form submitted:', { name, email, inquiryType, message });
+            alert('Message sent successfully! (This is a demo)');
+            contactForm.reset(); // Clear the form
+        });
     }
-
-    toggleButton.addEventListener('click', () => {
-        let theme = document.body.getAttribute('data-theme');
-        if (theme === 'dark') {
-            document.body.setAttribute('data-theme', 'light');
-            localStorage.setItem('theme', 'light');
-            toggleButton.textContent = 'Toggle Dark Mode';
-        } else {
-            document.body.setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', 'dark');
-            toggleButton.textContent = 'Toggle Light Mode';
-        }
-    });
 });
+
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+}
